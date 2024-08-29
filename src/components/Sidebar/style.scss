@@ -1,0 +1,47 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+
+    &__button {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 12px;
+
+        background-color: white;
+
+        cursor: pointer;
+
+        &_circle {
+            border-radius: 100%;
+        }
+
+        &_triangle {
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 60px solid white;
+            background-color: transparent;
+        }
+
+        &_line {
+            height: 10px;
+            margin-bottom: 0px;
+            background-color: white;
+        }
+
+        &_text {
+            font-size: 60px;
+            color: white;
+            background-color: transparent;
+        }
+    }
+}
