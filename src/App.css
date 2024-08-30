@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 20px;
+}
+
+.canvas {
+  border: 1px solid black;
+}
