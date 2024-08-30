@@ -1,5 +1,3 @@
-import { MyCanvas } from "../../types/CanvasType";
-
 import {
   addCircle,
   addLine,
@@ -9,11 +7,10 @@ import {
 } from "../../helpers/objectCreator";
 
 import "./style.scss";
+import { useCanvas } from "../../hooks/useCanvas";
 
-interface ISideBar {
-  canvas: MyCanvas;
-}
-export const Sidebar = ({ canvas }: ISideBar) => {
+export const Sidebar = () => {
+  const { canvas } = useCanvas();
   return (
     <div className="sidebar">
       <button
