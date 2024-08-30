@@ -4,7 +4,6 @@ import { useCanvas } from "./useCanvas";
 
 export const useObjectCreator = () => {
   const { selectedObjects, setSelectedObjects } = useCanvas();
-
   const addRect = (canvas: MyCanvas) => {
     if (canvas) {
       const rect = new fabric.Rect({
@@ -70,12 +69,40 @@ export const useObjectCreator = () => {
 
   const addText = (canvas: MyCanvas) => {
     if (canvas) {
-      const text = new fabric.Text("hello world", { left: 100, top: 100 });
+      const text = new fabric.Textbox("hello world", { left: 100, top: 100 });
       text.on("selected", () => {
         setSelectedObjects([...selectedObjects, text]);
       });
       canvas.add(text);
     }
   };
-  return { addCircle, addRect, addLine, addTriangle, addText };
+
+  const addImage = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    canvas: MyCanvas
+  ) => {
+    if (canvas && e.currentTarget.files) {
+      const file = e.currentTarget.files[0];
+      if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const image = new Image();
+          image.src = e.target && e.target.result ? e.target.result : "";
+          image.onload = function () {
+            const img = new fabric.Image(image);
+            img.set({
+              left: 100,
+              top: 60,
+            });
+            img.scaleToWidth(140);
+            canvas.add(img);
+            canvas.renderAll();
+          };
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  };
+
+  return { addCircle, addRect, addLine, addTriangle, addText, addImage };
 };

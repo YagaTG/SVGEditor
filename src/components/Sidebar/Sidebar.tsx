@@ -8,8 +8,7 @@ import { useObjectCreator } from "../../hooks/useObjectCreator";
 export const Sidebar = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [isSuccesfulCopied, setSuccecfulCopied] = useState<boolean>(false);
-
-  const { addCircle, addRect, addLine, addText, addTriangle } =
+  const { addCircle, addRect, addLine, addText, addTriangle, addImage } =
     useObjectCreator();
   const { canvas } = useCanvas();
   return (
@@ -44,6 +43,17 @@ export const Sidebar = () => {
       >
         T
       </button>
+      <form>
+        <label className="sidebar__form">
+          <input
+            type="file"
+            className="sidebar__input"
+            onChange={(e) => addImage(e, canvas)}
+          />
+          <span className="sidebar__button sidebar__button_img"></span>
+        </label>
+      </form>
+
       {isModalOpen && canvas && (
         <ModalWindow
           closeFuncs={[setModalOpen, setSuccecfulCopied]}
@@ -69,7 +79,12 @@ export const Sidebar = () => {
           </div>
         </ModalWindow>
       )}
-      <button onClick={() => setModalOpen(true)}> Сохранить</button>
+      <button
+        onClick={() => setModalOpen(true)}
+        className="sidebar__button_save"
+      >
+        Сохранить
+      </button>
     </div>
   );
 };
