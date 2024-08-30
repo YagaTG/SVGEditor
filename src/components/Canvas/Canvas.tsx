@@ -5,7 +5,7 @@ import { useCanvas } from "../../hooks/useCanvas";
 export const Canvas = () => {
   const canvasEl = useRef<HTMLCanvasElement>();
 
-  const { setCurrentZoom, setCanvas } = useCanvas();
+  const { setCurrentZoom, setCanvas, setSelectedObjects } = useCanvas();
   useEffect(() => {
     const canvas = new fabric.Canvas(canvasEl.current);
 
@@ -51,8 +51,30 @@ export const Canvas = () => {
       this.isDragging = false;
       this.selection = true;
     });
+
+    canvas.on("selection:cleared", () => {
+      setSelectedObjects([]);
+    });
+
+    function deleteObjects(e: KeyboardEvent) {
+      if (
+        e.keyCode == 46 ||
+        e.key == "Delete" ||
+        e.code == "Delete" ||
+        e.key == "Backspace"
+      ) {
+        if (canvas._activeObject) {
+          setSelectedObjects([]);
+          canvas.remove(canvas._activeObject);
+          canvas.renderAll();
+        }
+      }
+    }
+
+    document.addEventListener("keydown", deleteObjects);
     setCanvas(canvas);
     return () => {
+      document.removeEventListener("keydown", deleteObjects);
       canvas.dispose();
     };
   }, []);

@@ -1,20 +1,16 @@
-import {
-  addCircle,
-  addLine,
-  addRect,
-  addText,
-  addTriangle,
-} from "../../helpers/objectCreator";
-
 import "./style.scss";
 import { useCanvas } from "../../hooks/useCanvas";
 import { useState } from "react";
 import { ModalWindow } from "../ModalWindow/ModalWIndow";
 import { copyText } from "../../helpers/textHandler";
+import { useObjectCreator } from "../../hooks/useObjectCreator";
 
 export const Sidebar = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [isSuccesfulCopied, setSuccecfulCopied] = useState<boolean>(false);
+
+  const { addCircle, addRect, addLine, addText, addTriangle } =
+    useObjectCreator();
   const { canvas } = useCanvas();
   return (
     <div className="sidebar">
