@@ -87,7 +87,12 @@ export const useObjectCreator = () => {
         const reader = new FileReader();
         reader.onload = function (e) {
           const image = new Image();
-          image.src = e.target && e.target.result ? e.target.result : "";
+          if (
+            e.target &&
+            e.target.result &&
+            typeof e.target.result === "string"
+          )
+            image.src = e.target.result;
           image.onload = function () {
             const img = new fabric.Image(image);
             img.set({

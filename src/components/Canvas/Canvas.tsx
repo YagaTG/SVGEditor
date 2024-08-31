@@ -5,7 +5,8 @@ import { useCanvas } from "../../hooks/useCanvas";
 export const Canvas = () => {
   const canvasEl = useRef<HTMLCanvasElement>();
 
-  const { setCurrentZoom, setCanvas, setSelectedObjects } = useCanvas();
+  const { setCurrentZoom, setCanvas, setSelectedObjects, setCanvasState } =
+    useCanvas();
   useEffect(() => {
     const canvas = new fabric.Canvas(canvasEl.current);
 
@@ -63,16 +64,25 @@ export const Canvas = () => {
         e.code == "Delete" ||
         e.key == "Backspace"
       ) {
-        if (canvas._activeObject) {
-          setSelectedObjects([]);
-          canvas.remove(canvas._activeObject);
-          canvas.renderAll();
-        }
+        canvas.getActiveObjects().forEach((obj) => canvas.remove(obj));
+        canvas.discardActiveObject();
+        canvas.renderAll();
+        const canvasState = { ...canvas.toJSON(), isDeleted: true };
+        setCanvasState(canvasState);
       }
     }
+    canvas.on("object:added", () => {
+      const canvasState = canvas.toJSON();
+      setCanvasState(canvasState);
+    });
+    canvas.on("object:modified", () => {
+      const canvasState = canvas.toJSON();
+      setCanvasState(canvasState);
+    });
 
     document.addEventListener("keydown", deleteObjects);
     setCanvas(canvas);
+    setCanvasState({ ...canvas.toJSON(), ind: 0 });
     return () => {
       document.removeEventListener("keydown", deleteObjects);
       canvas.dispose();
