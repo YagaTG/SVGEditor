@@ -1,20 +1,21 @@
 .zoom {
+    position: absolute;
+    right: 0;
     height: 100%;
 
     text-align: center;
 
     &__buttons {
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 1);
     }
 
     &__button {
         width: 40px;
         height: 40px;
         font-size: 24px;
+        font-weight: bold;
         color: white;
-
         background-color: transparent;
-        border: 1px solid black;
         cursor: pointer;
     }
 
