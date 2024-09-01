@@ -1,5 +1,5 @@
 .modal {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -37,6 +37,7 @@
 
     &__content {
         margin-bottom: 12px;
+        word-break: break-all;
     }
 
     &__copy-btn {

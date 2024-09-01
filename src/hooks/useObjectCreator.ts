@@ -5,8 +5,8 @@ export const useObjectCreator = () => {
   const addRect = (canvas: MyCanvas) => {
     if (canvas) {
       const rect = new fabric.Rect({
-        left: 0,
-        top: 0,
+        left: 200,
+        top: 50,
         fill: "black",
         width: 40,
         height: 40,
@@ -18,8 +18,8 @@ export const useObjectCreator = () => {
   const addCircle = (canvas: MyCanvas) => {
     if (canvas) {
       const circle = new fabric.Circle({
-        left: 0,
-        top: 0,
+        left: 200,
+        top: 50,
         radius: 20,
         fill: "black",
       });
@@ -31,8 +31,8 @@ export const useObjectCreator = () => {
   const addTriangle = (canvas: MyCanvas) => {
     if (canvas) {
       const triangle = new fabric.Triangle({
-        left: 0,
-        top: 0,
+        left: 200,
+        top: 50,
         fill: "black",
         width: 40,
         height: 40,
@@ -44,8 +44,8 @@ export const useObjectCreator = () => {
   const addLine = (canvas: MyCanvas) => {
     if (canvas) {
       const line = new fabric.Line([50, 0, 0, 0], {
-        left: 10,
-        top: 10,
+        left: 200,
+        top: 50,
         stroke: "black",
       });
       canvas.add(line);
@@ -54,7 +54,7 @@ export const useObjectCreator = () => {
 
   const addText = (canvas: MyCanvas) => {
     if (canvas) {
-      const text = new fabric.Textbox("hello world", { left: 100, top: 100 });
+      const text = new fabric.Textbox("hello world", { left: 200, top: 50 });
       canvas.add(text);
     }
   };
@@ -78,8 +78,8 @@ export const useObjectCreator = () => {
           image.onload = function () {
             const img = new fabric.Image(image);
             img.set({
-              left: 100,
-              top: 60,
+              left: 200,
+              top: 50,
             });
             img.scaleToWidth(140);
             canvas.add(img);

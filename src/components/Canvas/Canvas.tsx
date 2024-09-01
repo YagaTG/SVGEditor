@@ -5,12 +5,22 @@ import { SettingBar } from "../SettingBar/SettingBar";
 
 export const Canvas = () => {
   const canvasEl = useRef<HTMLCanvasElement>();
-  const width = window.innerWidth;
   const { setCurrentZoom, setCanvas, setCanvasState } = useCanvas();
   const [isSelect, setSelect] = useState(false);
   useEffect(() => {
     const canvas = new fabric.Canvas(canvasEl.current);
-
+    function resizeCanvas() {
+      const ratio = canvas.getWidth() / canvas.getHeight();
+      const containerWidth = window.innerWidth;
+      const scale = containerWidth / canvas.getWidth();
+      const zoom = canvas.getZoom() * scale;
+      canvas.setDimensions({
+        width: window.innerWidth,
+        height: containerWidth / ratio,
+      });
+      canvas.setViewportTransform([zoom, 0, 0, zoom, 0, 0]);
+    }
+    window.addEventListener("resize", resizeCanvas);
     canvas.on("mouse:wheel", function (opt) {
       const delta = opt.e.deltaY;
       let zoom = canvas.getZoom();
@@ -86,14 +96,16 @@ export const Canvas = () => {
     document.addEventListener("keydown", deleteObjects);
     setCanvas(canvas);
     setCanvasState({ ...canvas.toJSON(), ind: 0 });
+    resizeCanvas();
     return () => {
+      window.removeEventListener("resize", resizeCanvas);
       document.removeEventListener("keydown", deleteObjects);
       canvas.dispose();
     };
   }, []);
   return (
     <div>
-      <canvas className="canvas" width={width} height="1000" ref={canvasEl} />
+      <canvas className="canvas" width={100} height={100} ref={canvasEl} />
       <SettingBar isOpen={isSelect}></SettingBar>
     </div>
   );

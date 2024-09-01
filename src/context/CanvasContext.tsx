@@ -6,7 +6,6 @@ import {
   useState,
 } from "react";
 import { MyCanvas, CanvasState } from "../types/CanvasType";
-import * as fabric from "fabric";
 
 type CanvasContextType = {
   currentZoom: number;
