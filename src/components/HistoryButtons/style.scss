@@ -1,0 +1,39 @@
+.history {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+
+    &__btn {
+        width: 32px;
+        height: 32px;
+        background-color: transparent;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+
+        &_undo {
+            background-image: url("undo.png");
+
+            &:hover {
+                background-image: url("undo_hover.png");
+            }
+
+            &:disabled {
+                background-image: url("undo_disabled.png");
+            }
+        }
+
+        &_redo {
+            background-image: url("redo.png");
+
+            &:hover {
+                background-image: url("redo_hover.png");
+            }
+
+            &:disabled {
+                background-image: url("redo_disabled.png");
+            }
+        }
+    }
+}
