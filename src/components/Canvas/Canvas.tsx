@@ -33,21 +33,23 @@ export const Canvas = () => {
       if (zoom > 20) zoom = 20;
       if (zoom < 0.01) zoom = 0.01;
       setCurrentZoom(zoom);
-      canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
+      canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY } as any, zoom);
       opt.e.preventDefault();
       opt.e.stopPropagation();
     });
 
-    canvas.on("mouse:down", function (opt) {
+    canvas.on("mouse:down", function (opt: any) {
       const evt = opt.e;
       if (evt.altKey === true) {
         this.isDragging = true;
         this.selection = false;
+        console.log(evt);
+
         this.lastPosX = evt.clientX;
         this.lastPosY = evt.clientY;
       }
     });
-    canvas.on("mouse:move", function (opt) {
+    canvas.on("mouse:move", function (opt: any) {
       if (this.isDragging) {
         const e = opt.e;
         const vpt = this.viewportTransform;
@@ -97,6 +99,7 @@ export const Canvas = () => {
     setCanvas(canvas);
     setCanvasState({ ...canvas.toJSON(), ind: 0 });
     resizeCanvas();
+    canvas.setZoom(1);
     return () => {
       window.removeEventListener("resize", resizeCanvas);
       document.removeEventListener("keydown", deleteObjects);
