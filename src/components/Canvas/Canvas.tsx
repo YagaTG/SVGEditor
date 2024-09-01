@@ -74,10 +74,11 @@ export const Canvas = () => {
     });
     function deleteObjects(e: KeyboardEvent) {
       if (
-        e.keyCode == 46 ||
-        e.key == "Delete" ||
-        e.code == "Delete" ||
-        e.key == "Backspace"
+        e.altKey &&
+        (e.keyCode == 46 ||
+          e.key == "Delete" ||
+          e.code == "Delete" ||
+          e.key == "Backspace")
       ) {
         canvas.getActiveObjects().forEach((obj) => canvas.remove(obj));
         canvas.discardActiveObject();
