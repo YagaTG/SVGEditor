@@ -1,12 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as fabric from "fabric";
 import { useCanvas } from "../../hooks/useCanvas";
+import { SettingBar } from "../SettingBar/SettingBar";
 
 export const Canvas = () => {
   const canvasEl = useRef<HTMLCanvasElement>();
-
-  const { setCurrentZoom, setCanvas, setSelectedObjects, setCanvasState } =
-    useCanvas();
+  const width = window.innerWidth;
+  const { setCurrentZoom, setCanvas, setCanvasState } = useCanvas();
+  const [isSelect, setSelect] = useState(false);
   useEffect(() => {
     const canvas = new fabric.Canvas(canvasEl.current);
 
@@ -54,9 +55,11 @@ export const Canvas = () => {
     });
 
     canvas.on("selection:cleared", () => {
-      setSelectedObjects([]);
+      setSelect(false);
     });
-
+    canvas.on("selection:created", () => {
+      setSelect(true);
+    });
     function deleteObjects(e: KeyboardEvent) {
       if (
         e.keyCode == 46 ||
@@ -89,6 +92,9 @@ export const Canvas = () => {
     };
   }, []);
   return (
-    <canvas className="canvas" width="1000" height="1000" ref={canvasEl} />
+    <div>
+      <canvas className="canvas" width={width} height="1000" ref={canvasEl} />
+      <SettingBar isOpen={isSelect}></SettingBar>
+    </div>
   );
 };

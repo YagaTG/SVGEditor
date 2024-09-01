@@ -13,10 +13,6 @@ type CanvasContextType = {
   setCurrentZoom: React.Dispatch<React.SetStateAction<number>>;
   canvas: MyCanvas;
   setCanvas: React.Dispatch<React.SetStateAction<MyCanvas>>;
-  selectedObjects: fabric.FabricObject[];
-  setSelectedObjects: React.Dispatch<
-    React.SetStateAction<fabric.FabricObject[]>
-  >;
   historyChanges: CanvasState[];
   setHistoryChanges: React.Dispatch<React.SetStateAction<CanvasState[]>>;
   historyRedo: CanvasState[];
@@ -30,9 +26,6 @@ export const CanvasContext = createContext<CanvasContextType | null>(null);
 export const CanvasProvider: FC<PropsWithChildren> = ({ children }) => {
   const [currentZoom, setCurrentZoom] = useState<number>(1);
   const [canvas, setCanvas] = useState<MyCanvas>(null);
-  const [selectedObjects, setSelectedObjects] = useState<fabric.FabricObject[]>(
-    []
-  );
   const [canvasState, setCanvasState] = useState<CanvasState | undefined>();
   const [historyChanges, setHistoryChanges] = useState<CanvasState[]>([]);
   const [historyRedo, setHistoryRedo] = useState<CanvasState[]>([]);
@@ -63,8 +56,6 @@ export const CanvasProvider: FC<PropsWithChildren> = ({ children }) => {
         setCurrentZoom,
         canvas,
         setCanvas,
-        selectedObjects,
-        setSelectedObjects,
         historyChanges,
         setHistoryChanges,
         canvasState,
