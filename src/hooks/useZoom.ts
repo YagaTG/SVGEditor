@@ -1,7 +1,7 @@
 import { useCanvas } from "./useCanvas";
 
 export const useZoom = () => {
-  const { canvas, setCurrentZoom, currentZoom } = useCanvas();
+  const { canvas, setCurrentZoom } = useCanvas();
 
   const zoomIn = () => {
     if (canvas) {
@@ -13,8 +13,9 @@ export const useZoom = () => {
   };
 
   const zoomOut = () => {
-    if (canvas && currentZoom > 0) {
-      const zoom = canvas.getZoom() - 25 / 100;
+    if (canvas) {
+      let zoom = canvas.getZoom() - 25 / 100;
+      if (zoom < 0.01) zoom = 0.01;
       canvas.setZoom(zoom);
       setCurrentZoom(zoom);
       canvas.requestRenderAll();
