@@ -10,3 +10,19 @@
     border-radius: 8px;
     z-index: 40;
 }
+
+@media screen and (max-width: 574px) {
+    .settings {
+        top: auto;
+        bottom: 10px;
+        width: 170px;
+    }
+
+    .w-color-interactive {
+        width: 150px !important;
+    }
+
+    .w-color-alpha {
+        width: 150px;
+    }
+}

@@ -23,3 +23,23 @@
         font-weight: bold;
     }
 }
+
+@media screen and (max-width: 720px) {
+    .zoom {
+        &__button {
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: 574px) {
+    .zoom {
+        margin-left: 14px;
+
+        &__button {
+            font-size: 16px;
+        }
+    }
+}

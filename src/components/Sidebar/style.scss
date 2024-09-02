@@ -109,6 +109,24 @@
         &__button {
             width: 40px;
             height: 40px;
+
+            &_save {
+                font-size: 16px;
+            }
+
+            &_line {
+                height: 10px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 574px) {
+    .sidebar {
+        &__button {
+            &_save {
+                font-size: 14px;
+            }
         }
     }
 }
