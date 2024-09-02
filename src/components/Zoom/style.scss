@@ -1,9 +1,9 @@
 .zoom {
-    position: absolute;
-    right: 0;
-    height: 100%;
-
+    width: fit-content;
+    height: fit-content;
+    align-self: center;
     text-align: center;
+    margin-left: 18px;
 
     &__buttons {
         background-color: rgba(0, 0, 0, 1);

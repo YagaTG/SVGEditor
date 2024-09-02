@@ -10,13 +10,12 @@ export const Canvas = () => {
   useEffect(() => {
     const canvas = new fabric.Canvas(canvasEl.current);
     function resizeCanvas() {
-      const ratio = canvas.getWidth() / canvas.getHeight();
       const containerWidth = window.innerWidth;
       const scale = containerWidth / canvas.getWidth();
       const zoom = canvas.getZoom() * scale;
       canvas.setDimensions({
         width: window.innerWidth,
-        height: containerWidth / ratio,
+        height: window.innerHeight,
       });
       canvas.setViewportTransform([zoom, 0, 0, zoom, 0, 0]);
     }
